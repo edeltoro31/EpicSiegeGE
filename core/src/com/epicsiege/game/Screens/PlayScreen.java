@@ -23,7 +23,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(MyGdxGame game){
         this.game = game;
-        texture = new Texture("badlogic.jpg");
+        texture = new Texture("EpicSiegeAVI.jpg");
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(800, 400, gamecam);
     }
