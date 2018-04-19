@@ -20,7 +20,7 @@ import com.epicsiege.game.Screens.PlayScreen;
 
 public class Guy extends Sprite{
 
-    //for the avatar.
+    //for the Avatar (to define what state he'll be in).
     public enum State {FALLING, JUMPING, STANDING, RUNNING, FIGHTING};
     public State currentState;
     public State previousState;
@@ -29,7 +29,7 @@ public class Guy extends Sprite{
     public World world;
     public Body b2body;
 
-    //for the avatar.
+    //for the Avatar (to define what sprite to use).
     private TextureRegion guyStand;
     private Animation<TextureRegion> guyRun;
     private Animation<TextureRegion> guyJump;
@@ -41,26 +41,33 @@ public class Guy extends Sprite{
 
     public Guy (World world, PlayScreen screen) {
 
+        //sprite for the Avatar(Guy) default state.
         super(screen.getAtlas().findRegion("hero_standing"));
 
         this.world = world;
 
+        //Avatars current state when not moving.
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
 
+        //This array holds the Avatar(Guy's) different positions.
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
-        //Running
+        //Sets the running sprites for our Avatar(Guy)
+        //the sprites sizes are all 49x49
+        // the x and y coordinates tell where the sprite is located in the pack png.
         frames.add(new TextureRegion(getTexture(), 5 * 50, 0, 49, 49));
         guyRun = new Animation(0.1f, frames);
         frames.clear();
 
 
-        //jumping
+        //Sets the jumping sprites for our Avatar (Guy)
         for (int i = 6; i < 9; i++) {
 
+            //The final state for the jump is located towards the front of the pack, hence the if statement
+            //setting the last frame to an earlier location.
             if (i == 8)
                 frames.add(new TextureRegion(getTexture(), 4 * 50, 0, 49, 49));
             else
@@ -68,15 +75,15 @@ public class Guy extends Sprite{
         }
         guyJump = new Animation(0.1f, frames);
 
-        //fighting
+        //Sets the fighting sprites for our Avatar (Guy)
         for (int i = 9; i < 13; i++)
             frames.add(new TextureRegion(getTexture(), i * 50, 0, 50, 50));
         guyFight = new Animation (0.1f, frames);
-        //frames.clear();
+
 
         defineGuy();
 
-
+        //Sets the size of our Avatar(Guy) in relation to our Map or World.
         guyStand = new TextureRegion(getTexture(), 0, 0, 49, 49);
         setBounds(0, 0, 49 / (MyGdxGame.PPM + 20), 49 / (MyGdxGame.PPM + 20));
         setRegion(guyStand);
@@ -88,6 +95,7 @@ public class Guy extends Sprite{
         setRegion(getFrame(dt));
     }
 
+    //Defines what frame the Avatar (Guy) should take in game.
     public TextureRegion getFrame (float dt) {
         currentState = getState();
 
@@ -109,6 +117,7 @@ public class Guy extends Sprite{
                 break;
         }
 
+        //Is he running left or right.
         if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
             region.flip(true, false);
             runningRight = false;
@@ -124,6 +133,8 @@ public class Guy extends Sprite{
 
     }
 
+    //Gets the state of our Avatar (Guy) based on what he is doing on the x and y coordinate Map.
+    //If he's moving along the x axis he's running, if he's moving along the y axis he's jumping.
     public State getState() {
         if (b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
@@ -147,6 +158,7 @@ public class Guy extends Sprite{
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
+        //Defines the physical components of our Avatar(Guy), our Guy is a sphere with a radius of 6.
         FixtureDef fdef = new FixtureDef();
         FixtureDef fdef2 = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -158,15 +170,16 @@ public class Guy extends Sprite{
 
         fdef.shape = shape;
         fdef2.shape = shape;
+
         b2body.createFixture(fdef);
 
         //collision detector
         //sensor in our Guy's body
         EdgeShape bodyf = new EdgeShape();
         EdgeShape bodyb = new EdgeShape();
-        //sensor is at the center.
-        bodyf.set(new Vector2(6 / MyGdxGame.PPM, 6/ MyGdxGame.PPM), new Vector2(6 / MyGdxGame.PPM, 0/ MyGdxGame.PPM));
-        bodyb.set(new Vector2(-6 / MyGdxGame.PPM, 6/ MyGdxGame.PPM), new Vector2(-6 / MyGdxGame.PPM, 0/ MyGdxGame.PPM));
+        //There is a sensor in front and behind our Avatar(Guy)
+        bodyf.set(new Vector2(8 / MyGdxGame.PPM, 8/ MyGdxGame.PPM), new Vector2(8 / MyGdxGame.PPM, -8/ MyGdxGame.PPM));
+        bodyb.set(new Vector2(-8 / MyGdxGame.PPM, -8/ MyGdxGame.PPM), new Vector2(-8 / MyGdxGame.PPM, 8/ MyGdxGame.PPM));
         fdef.shape = bodyf;
         fdef2.shape = bodyb;
         fdef.isSensor = true;

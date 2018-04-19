@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Floor extends InteractiveTileObjects {
 
 
+    //Creates our floor;
     public Floor (World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
         fixture.setUserData(this);

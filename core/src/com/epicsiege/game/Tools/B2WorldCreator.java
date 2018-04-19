@@ -25,24 +25,21 @@ public class B2WorldCreator {
         Body body;
 
 
-        //create ground bodies/fixtures
+        //creates objects for our Tokens, so our Guy can interact with Tokens.
+        //the 2 stands for the objects location on the Tile Editor.
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
+            //creates Tokens in our Map.
             new Tokens(world, map, rect);
         }
 
-        /*
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            new Tokens(world, map, rect);
-        }
-        */
-
+        //creates objects for our Floor, so our Guy doesn't fall through to ground.
+        //the 3 stands for the objects location on the Tile Editor.
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
+            //creates the floor though out our Map.
             new Floor(world, map, rect);
         }
     }

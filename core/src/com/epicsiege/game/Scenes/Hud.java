@@ -35,6 +35,8 @@ public class Hud implements Disposable{
     Label worldLabel;
     Label epicLabel;
 
+    //TODO: Set time and score for our game and send to an SQL for storage and then pull that information for when the game restarts.
+
     public Hud (SpriteBatch sb){
         worldTimer = 300;
         timeCount = 0;
@@ -67,6 +69,7 @@ public class Hud implements Disposable{
 
     }
 
+    //Timer
     public void update (float dt) {
         timeCount += dt;
         if (timeCount >= 1) {

@@ -62,16 +62,17 @@ public class PlayScreen implements Screen{
         //Hud keeps track of our score, timer, and level.
         hud = new Hud(game.batch);
 
+        //Creates our world.
         maploader = new TmxMapLoader();
         map = maploader.load("epic_siege.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
-
         world = new World(new Vector2(0, -10 ), true);
         b2dr = new Box2DDebugRenderer();
 
         new B2WorldCreator(world, map);
 
+        //Gets our Avatar (Guy)
         player = new Guy(world, this);
 
         world.setContactListener(new WorldContactListener());

@@ -11,16 +11,19 @@ import com.epicsiege.game.MyGdxGame;
  */
 
 public class Tokens extends InteractiveTileObjects {
+
+    //Creates our Tokens on our Map.
     public Tokens(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
         fixture.setUserData(this);
         setCategoryFilter(MyGdxGame.TOKEN_BIT);
     }
 
+    //When the sensor collides with our Tokens, the Tokens are set to "null" and disappear from our Map.
     @Override
     public void onBodyHit () {
         Gdx.app.log("Token", "Collision");
         setCategoryFilter(MyGdxGame.DESTROYED_BIT);
-        getCell().setTile(null);
+        getCell().setTile(null); //tile where Token is located is set to "null".
     }
 }
