@@ -85,7 +85,7 @@ public class Guy extends Sprite{
 
         //Sets the size of our Avatar(Guy) in relation to our Map or World.
         guyStand = new TextureRegion(getTexture(), 0, 0, 49, 49);
-        setBounds(0, 0, 49 / (MyGdxGame.PPM + 20), 49 / (MyGdxGame.PPM + 20));
+        setBounds(0, 0, 49 / (MyGdxGame.PPM + 30), 49 / (MyGdxGame.PPM + 30));
         setRegion(guyStand);
     }
 
@@ -158,35 +158,59 @@ public class Guy extends Sprite{
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        //Defines the physical components of our Avatar(Guy), our Guy is a sphere with a radius of 6.
+        //Our collision detectors
         FixtureDef fdef = new FixtureDef();
         FixtureDef fdef2 = new FixtureDef();
+        FixtureDef fdef3 = new FixtureDef();
+        FixtureDef fdef4 = new FixtureDef();
+
+        //Defines the physical components of our Avatar(Guy), our Guy is a sphere with a radius of 6.
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / MyGdxGame.PPM);
+
+        //What our collision detectors can interact with.
         fdef.filter.categoryBits = MyGdxGame.GUY_BIT;
         fdef.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
         fdef2.filter.categoryBits = MyGdxGame.GUY_BIT;
         fdef2.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+        fdef3.filter.categoryBits = MyGdxGame.GUY_BIT;
+        fdef3.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+        fdef4.filter.categoryBits = MyGdxGame.GUY_BIT;
+        fdef4.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+
 
         fdef.shape = shape;
         fdef2.shape = shape;
+        fdef3.shape = shape;
+        fdef4.shape = shape;
 
         b2body.createFixture(fdef);
 
         //collision detector
         //sensor in our Guy's body
-        EdgeShape bodyf = new EdgeShape();
-        EdgeShape bodyb = new EdgeShape();
-        //There is a sensor in front and behind our Avatar(Guy)
-        bodyf.set(new Vector2(8 / MyGdxGame.PPM, 8/ MyGdxGame.PPM), new Vector2(8 / MyGdxGame.PPM, -8/ MyGdxGame.PPM));
-        bodyb.set(new Vector2(-8 / MyGdxGame.PPM, -8/ MyGdxGame.PPM), new Vector2(-8 / MyGdxGame.PPM, 8/ MyGdxGame.PPM));
+        EdgeShape bodyf = new EdgeShape(); //front
+        EdgeShape bodyb = new EdgeShape(); //back
+        EdgeShape bodyt = new EdgeShape(); //top
+        EdgeShape bodybt = new EdgeShape(); //bottom
+        //There is a sensor in front, behind, on top, and below our Avatar(Guy)
+        bodyf.set(new Vector2(12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
+        bodyb.set(new Vector2(-12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(-12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
+        bodyt.set(new Vector2(12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(-12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM));
+        bodybt.set(new Vector2(-12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM), new Vector2(12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
         fdef.shape = bodyf;
         fdef2.shape = bodyb;
+        fdef3.shape = bodyt;
+        fdef4.shape = bodybt;
+
         fdef.isSensor = true;
         fdef2.isSensor = true;
+        fdef3.isSensor = true;
+        fdef4.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("body");
         b2body.createFixture(fdef2).setUserData("body");
+        b2body.createFixture(fdef3).setUserData("body");
+        b2body.createFixture(fdef4).setUserData("body");
     }
 
 }
