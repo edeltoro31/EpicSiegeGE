@@ -2,9 +2,11 @@ package com.epicsiege.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.epicsiege.game.MyGdxGame;
+import com.epicsiege.game.Scenes.Hud;
 
 /**
  * Created by Joselito on 4/17/2018.
@@ -12,9 +14,13 @@ import com.epicsiege.game.MyGdxGame;
 
 public class Tokens extends InteractiveTileObjects {
 
+    private static TiledMapTileSet tileSet;
+    private final int BLANK_COIN = 1;
     //Creates our Tokens on our Map.
     public Tokens(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
+        tileSet = map.getTileSets().getTileSet("energy_balls");
+
         fixture.setUserData(this);
         setCategoryFilter(MyGdxGame.TOKEN_BIT);
     }
@@ -24,6 +30,8 @@ public class Tokens extends InteractiveTileObjects {
     public void onBodyHit () {
         Gdx.app.log("Token", "Collision");
         setCategoryFilter(MyGdxGame.DESTROYED_BIT);
-        getCell().setTile(null); //tile where Token is located is set to "null".
+         //tile where Token is located is set to "null".
+        getCell().setTile(tileSet.getTile(BLANK_COIN));
+        Hud.addScore(100);
     }
 }
