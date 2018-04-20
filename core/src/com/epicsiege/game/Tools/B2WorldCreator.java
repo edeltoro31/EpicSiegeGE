@@ -19,6 +19,8 @@ import com.epicsiege.game.Sprites.Tokens;
 public class B2WorldCreator {
 
     public B2WorldCreator(World world, TiledMap map) {
+       // World world = screen.getWorld();
+       // TiledMap map =screen.getMap();
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
@@ -27,16 +29,16 @@ public class B2WorldCreator {
 
         //creates objects for our Tokens, so our Guy can interact with Tokens.
         //the 2 stands for the objects location on the Tile Editor.
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             //creates Tokens in our Map.
-            new Tokens(world, map, rect);
+            new Tokens(world, map , rect);
         }
 
         //creates objects for our Floor, so our Guy doesn't fall through to ground.
         //the 3 stands for the objects location on the Tile Editor.
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             //creates the floor though out our Map.

@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epicsiege.game.MyGdxGame;
 import com.epicsiege.game.Scenes.Hud;
 import com.epicsiege.game.Sprites.Guy;
+import com.epicsiege.game.Sprites.Spikes;
 import com.epicsiege.game.Tools.B2WorldCreator;
 import com.epicsiege.game.Tools.WorldContactListener;
 
@@ -31,12 +32,16 @@ public class PlayScreen implements Screen{
     private MyGdxGame game;
 
     private TextureAtlas atlas;
+    private TextureAtlas atlasSpike;
 
     //play screen variables
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private Hud hud;
     private Guy player;
+
+    //our
+    private Spikes spikes, spikes2, spikes3, spikes4;
 
     //tiled map variables
     private TmxMapLoader maploader;
@@ -49,6 +54,10 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(MyGdxGame game){
         atlas = new TextureAtlas("Hero_and_Enemies.pack");
+
+
+        //sprites for Spikes
+        atlasSpike = new TextureAtlas("Spikes.pack");
 
         this.game = game;
         //camera that follows player though the map.
@@ -70,16 +79,30 @@ public class PlayScreen implements Screen{
         world = new World(new Vector2(0, -10 ), true);
         b2dr = new Box2DDebugRenderer();
 
+        //changed from new B2WorldCreator(map, world); to newB2WorldCreator(this);
+        //also edited constructor in B2WorldCreator class.
         new B2WorldCreator(world, map);
 
         //Gets our Avatar (Guy)
-        player = new Guy(world, this);
+        player = new Guy(world,this);
+
+        //creates Spikes in our map.
+        spikes = new Spikes(world, this, .32f, .32f, 1);
+        spikes2 = new Spikes(world, this, .32f, .32f, 2);
+        spikes3 = new Spikes(world, this, .32f, .32f, 3);
+        spikes4 = new Spikes(world, this, .32f, .32f, 4);
+
 
         world.setContactListener(new WorldContactListener());
     }
 
     public TextureAtlas getAtlas() {
         return atlas;
+    }
+
+    //NEW
+    public TextureAtlas getAtlasSpike() {
+        return atlasSpike;
     }
 
     @Override
@@ -106,7 +129,6 @@ public class PlayScreen implements Screen{
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             player.b2body.applyForce(new Vector2(0f, 0.1f), player.b2body.getWorldCenter(), true);
 
-
     }
 
 
@@ -120,6 +142,11 @@ public class PlayScreen implements Screen{
         world.step(1/60f, 6, 2);
 
         player.update(dt);
+        spikes.update(dt);
+        spikes2.update(dt);
+        spikes3.update(dt);
+        spikes4.update(dt);
+
         hud.update(dt);
 
         gamecam.position.x = player.b2body.getPosition().x;
@@ -147,6 +174,13 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
+
+        //draws the spikes on the map
+        spikes.draw(game.batch);
+        spikes2.draw(game.batch);
+        spikes3.draw(game.batch);
+        spikes4.draw(game.batch);
+
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -157,6 +191,14 @@ public class PlayScreen implements Screen{
     public void resize(int width, int height) {
         gamePort.update(width, height);
 
+    }
+
+    public TiledMap getMap() {
+        return map;
+    }
+
+    public World getWorld () {
+        return world;
     }
 
     @Override

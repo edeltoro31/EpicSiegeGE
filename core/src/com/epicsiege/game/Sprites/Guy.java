@@ -160,6 +160,7 @@ public class Guy extends Sprite{
 
         //Our collision detectors
         FixtureDef fdef = new FixtureDef();
+        FixtureDef fdef1 = new FixtureDef();
         FixtureDef fdef2 = new FixtureDef();
         FixtureDef fdef3 = new FixtureDef();
         FixtureDef fdef4 = new FixtureDef();
@@ -170,19 +171,20 @@ public class Guy extends Sprite{
 
         //What our collision detectors can interact with.
         fdef.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+        fdef.filter.maskBits =  MyGdxGame.TOKEN_BIT | MyGdxGame.DEFAULT_BIT;
+
+        fdef1.filter.categoryBits = MyGdxGame.GUY_BIT;
+        fdef1.filter.maskBits =  MyGdxGame.TOKEN_BIT;
         fdef2.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef2.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+        fdef2.filter.maskBits =  MyGdxGame.TOKEN_BIT;
         fdef3.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef3.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+        fdef3.filter.maskBits = MyGdxGame.TOKEN_BIT;
         fdef4.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef4.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.TOKEN_BIT;
+        fdef4.filter.maskBits = MyGdxGame.TOKEN_BIT;
 
 
         fdef.shape = shape;
-        fdef2.shape = shape;
-        fdef3.shape = shape;
-        fdef4.shape = shape;
+
 
         b2body.createFixture(fdef);
 
@@ -197,17 +199,17 @@ public class Guy extends Sprite{
         bodyb.set(new Vector2(-12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(-12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
         bodyt.set(new Vector2(12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(-12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM));
         bodybt.set(new Vector2(-12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM), new Vector2(12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
-        fdef.shape = bodyf;
+        fdef1.shape = bodyf;
         fdef2.shape = bodyb;
         fdef3.shape = bodyt;
         fdef4.shape = bodybt;
 
-        fdef.isSensor = true;
+        fdef1.isSensor = true;
         fdef2.isSensor = true;
         fdef3.isSensor = true;
         fdef4.isSensor = true;
 
-        b2body.createFixture(fdef).setUserData("body");
+        b2body.createFixture(fdef1).setUserData("body");
         b2body.createFixture(fdef2).setUserData("body");
         b2body.createFixture(fdef3).setUserData("body");
         b2body.createFixture(fdef4).setUserData("body");

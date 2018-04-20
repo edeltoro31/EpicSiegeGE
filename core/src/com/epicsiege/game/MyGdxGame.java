@@ -15,6 +15,7 @@ public class MyGdxGame extends Game {
 	public static final short GUY_BIT = 2;
 	public static final short TOKEN_BIT = 4;
 	public static final short DESTROYED_BIT = 16;
+	public static final short SPIKES_BIT = 32;
 
 
 	public SpriteBatch batch;
