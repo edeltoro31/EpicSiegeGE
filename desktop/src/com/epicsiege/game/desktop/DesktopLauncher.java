@@ -7,6 +7,9 @@ import com.epicsiege.game.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.title = "EPIC SIEGE";
+        config.width = 960;
+        config.height = 540;
 		new LwjglApplication(new MyGdxGame(), config);
 	}
 }
