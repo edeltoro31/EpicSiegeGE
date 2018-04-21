@@ -14,6 +14,7 @@ public class MyGdxGame extends Game {
 	public static final int V_HEIGHT = 208;
 	public static final float PPM = 100;
 
+	public static final short NOTHING_BIT = 0;
 	public static final short DEFAULT_BIT = 1;
 	public static final short GUY_BIT = 2;
 	public static final short TOKEN_BIT = 4;

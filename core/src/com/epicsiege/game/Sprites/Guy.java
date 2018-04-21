@@ -2,12 +2,15 @@ package com.epicsiege.game.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -21,21 +24,23 @@ import com.epicsiege.game.Screens.PlayScreen;
 public class Guy extends Sprite{
 
     //for the Avatar (to define what state he'll be in).
-    public enum State {FALLING, JUMPING, STANDING, RUNNING, FIGHTING};
+    public enum State {FALLING, JUMPING, STANDING, RUNNING, FIGHTING, DEAD};
     public State currentState;
     public State previousState;
 
 
     public World world;
-    public Body b2body;
+    public static Body b2body;
 
     //for the Avatar (to define what sprite to use).
     private TextureRegion guyStand;
+    private TextureRegion guyDead;
     private Animation<TextureRegion> guyRun;
     private Animation<TextureRegion> guyJump;
     private  Animation<TextureRegion> guyFight;
     private float stateTimer;
     private boolean runningRight;
+    private static boolean guyIsDead;
 
 
 
@@ -80,6 +85,8 @@ public class Guy extends Sprite{
             frames.add(new TextureRegion(getTexture(), i * 50, 0, 50, 50));
         guyFight = new Animation (0.1f, frames);
 
+        guyDead = new TextureRegion(screen.getAtlas().findRegion("hero_fighting"), 100, 0, 49, 49);
+
 
         defineGuy();
 
@@ -100,7 +107,11 @@ public class Guy extends Sprite{
         currentState = getState();
 
         TextureRegion region;
+
         switch (currentState) {
+            case DEAD:
+                region = guyDead;
+                break;
             case JUMPING:
                 region = guyJump.getKeyFrame(stateTimer);
                 break;
@@ -136,7 +147,9 @@ public class Guy extends Sprite{
     //Gets the state of our Avatar (Guy) based on what he is doing on the x and y coordinate Map.
     //If he's moving along the x axis he's running, if he's moving along the y axis he's jumping.
     public State getState() {
-        if (b2body.getLinearVelocity().y > 0)
+        if (guyIsDead)
+            return State.DEAD;
+        else if (b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
 
         else if (b2body.getLinearVelocity().y < 0)
@@ -213,6 +226,15 @@ public class Guy extends Sprite{
         b2body.createFixture(fdef2).setUserData("body");
         b2body.createFixture(fdef3).setUserData("body");
         b2body.createFixture(fdef4).setUserData("body");
+    }
+
+    public static void hit() {
+        guyIsDead = true;
+        Filter filter = new Filter();
+        filter.maskBits = MyGdxGame.NOTHING_BIT;
+        for (Fixture fixture : b2body.getFixtureList())
+            fixture.setFilterData(filter);
+        b2body.applyLinearImpulse(new Vector2(-2, 4f), b2body.getWorldCenter(), true);
     }
 
 }

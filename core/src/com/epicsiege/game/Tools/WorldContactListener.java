@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.epicsiege.game.MyGdxGame;
+import com.epicsiege.game.Sprites.Guy;
 import com.epicsiege.game.Sprites.InteractiveTileObjects;
 import com.epicsiege.game.Sprites.Spikes;
 
@@ -23,12 +24,22 @@ public class WorldContactListener implements ContactListener{
         Fixture fixB = contact.getFixtureB();
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
-
+    /*
         if(fixA.getUserData() == "body" || fixB.getUserData() == "body") {
             Fixture body = fixA.getUserData() == "body" ? fixA : fixB;
             Fixture object = body == fixA ? fixB : fixA;
 
             if (object.getUserData() instanceof InteractiveTileObjects) {
+                ((InteractiveTileObjects) object.getUserData()).onBodyHit();
+            }
+
+        }
+    */
+        if(fixA.getUserData() == "body" || fixB.getUserData() == "body") {
+            Fixture body = fixA.getUserData() == "body" ? fixA : fixB;
+            Fixture object = body == fixA ? fixB : fixA;
+
+            if (object.getUserData() != null && InteractiveTileObjects.class.isAssignableFrom(object.getUserData().getClass())) {
                 ((InteractiveTileObjects) object.getUserData()).onBodyHit();
             }
 
@@ -43,6 +54,7 @@ public class WorldContactListener implements ContactListener{
 
             case MyGdxGame.SPIKES_BIT | MyGdxGame.GUY_BIT:
                 Gdx.app.log("Guy", "Dead");
+                Guy.hit();
 
                 break;
         }
