@@ -208,10 +208,10 @@ public class Guy extends Sprite{
         EdgeShape bodyt = new EdgeShape(); //top
         EdgeShape bodybt = new EdgeShape(); //bottom
         //There is a sensor in front, behind, on top, and below our Avatar(Guy)
-        bodyf.set(new Vector2(12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
-        bodyb.set(new Vector2(-12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(-12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
-        bodyt.set(new Vector2(12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM), new Vector2(-12 / MyGdxGame.PPM, 12 / MyGdxGame.PPM));
-        bodybt.set(new Vector2(-12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM), new Vector2(12 / MyGdxGame.PPM, -12 / MyGdxGame.PPM));
+        bodyf.set(new Vector2(10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM), new Vector2(10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM));
+        bodyb.set(new Vector2(-10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM), new Vector2(-10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM));
+        bodyt.set(new Vector2(10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM), new Vector2(-10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
+        bodybt.set(new Vector2(-10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM), new Vector2(10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM));
         fdef1.shape = bodyf;
         fdef2.shape = bodyb;
         fdef3.shape = bodyt;
@@ -228,13 +228,15 @@ public class Guy extends Sprite{
         b2body.createFixture(fdef4).setUserData("body");
     }
 
-    public static void hit() {
-        guyIsDead = true;
-        Filter filter = new Filter();
-        filter.maskBits = MyGdxGame.NOTHING_BIT;
-        for (Fixture fixture : b2body.getFixtureList())
-            fixture.setFilterData(filter);
-        b2body.applyLinearImpulse(new Vector2(-2, 4f), b2body.getWorldCenter(), true);
+    public static void hit(boolean x) {
+        guyIsDead = x;
+        if (x == true) {
+            Filter filter = new Filter();
+            filter.maskBits = MyGdxGame.NOTHING_BIT;
+            for (Fixture fixture : b2body.getFixtureList())
+                fixture.setFilterData(filter);
+            b2body.applyLinearImpulse(new Vector2(-2, 4f), b2body.getWorldCenter(), true);
+        }
     }
 
     public boolean isDead () {

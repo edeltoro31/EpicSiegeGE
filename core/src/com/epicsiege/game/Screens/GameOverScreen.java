@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epicsiege.game.MyGdxGame;
+import com.epicsiege.game.Sprites.Guy;
 
 import java.awt.Label;
 
@@ -55,6 +56,7 @@ public class GameOverScreen implements Screen{
     @Override
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
+            Guy.hit(false);
             game.setScreen(new PlayScreen((MyGdxGame) game));
             dispose();
         }
