@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="278">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="280">
  <tileset firstgid="1" source="DBZ_tileset.tsx"/>
  <tileset firstgid="465" source="energy_balls.tsx"/>
  <tileset firstgid="467" source="spikes.tsx"/>
@@ -9,15 +9,15 @@
    eJztzEdfzwEAx/H/MymSKLOzlZmQc/ZIRp3tlt3ZSJmhzlaULWd7lshD8T54CF6/0/fwfn1un/JSqVQeEREREREREREREfGflf3rNKZTwQwqmUkVs5hNNTXMYS7zmM8CFlKbX375FfpbxGKWsJRl1LGcFaxkFatZQz1raWAd69lAIxvzyy+/Qn9NbGIzW9jKNrazg53sYjfN7KGFvexjPwdopS2//PIr9HeQQxzmCEc5xnHa6aCTLro5wUlOcZoznOUcPfnll1+hv/Nc4CKX6OUyffRzhatc4zo3uMkAt7jNHQYZyi+//Ar93eUe93nAQ4Z5xGNGGOUJT3nGc17wkle8Zow3+eWXX6G/t7zjPR/4yCc+84WvfOM7Pxhngp9M8ovfTPEnv/zyK/T3F2CL+OY=
   </data>
  </layer>
- <layer name="graphics" width="240" height="13">
+ <layer name="graphics" width="240" height="13" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmNtO1EAYgNu9EvQh9nU4qKhvgb6NXqG3RsWgoAQXUQE1nhUFo4JnFA/LwTPG6AXfpG0yNN1pp22Wsfxf8qXbpjM7p3/+tp4nCOk88jcfbenyA7uxJ1bHXs77cF+oIAjFOV4L4vUEx5N4CgfxdC1/HAtCErKeymeIOD2DZ3EYR/AcnsfR2la3TiiTemjW6y4SPePpz3n6796Me0TdS+6zqV71DLnfsT1I7YljxOkFbOA4XsQJvGSRg/eE/Sv73q2mSjmj7rWO01bXq0rdq8bcXiZGr+AkTuE0XsVreN0i/1Y1fqvCbj953Ftdd53lsL2rHJt+cL7iB+c6efttqtMl1B50gzi9ibfwNt7Bu3ivwDtwvFwV9rrtjMxfe8k63veJ0Qc4gw9VvOIszuHjHO+/8XcGfZ+Lvj8L7UEf+3g+aWrzEOUXV3OxbbtM/V5LuNZtWX9Pyrtw0TG0Ka/i/Alx+hSf4Twu4HN8Yci/Ls6zsD3YwbrswE7cGa5R/bxIvMf/Q9Wt6txlkcsOUuZQgdiwKf+Sdr3C1/gG3+IivsP3hjbb/EfR/gibSXu+UXnhQMHxbsd/5CH69mxqW79vt+b0+031Zv3+3M78u0SMfsCP+Ak/YxOXccUQv/K96v8iyicKlU/0HOYCR/FYSXXpsRfP1Wn3l4FtvjqMR3KWX6VPa/gFv+I3/I4/8GfO/DvgBfMRIfHrHq59j2rgeEl1mfJvUr9t83UaWerS2zGMI5blI34Ro+v4O3zW/xMe/3L8lzP/qvKNDPfariHX1pwgCEIaG9lGseg=
+   eJztmNlO1UAYgNtzheJDnNcRVFTeQn0bvVJvjYJRQYgeBHfjCu5xRwVcD6sLGKMXfpO2ydC0007bHMbyf8mXnjZnprP987f1PEHI5pG//mjLdj+wB3tjdfRxvhv3hAqCUJ5jjSBej3M8gQM4iCcbxeNYEJKQ9VQ9p4jT03gGh3AYz+IIjjY2unVClTRD8153kegZT3/O03/vyLlHNL3kPpvqVc+Qex3bg9SeeI44PY8tHMMLOI4TFjl4V9i/qv+70dQpZzS99DhNu15Xml495vYiMXoJL+MVvIrX8DresMi/dY3furDTTx73tOuuMx+2d5Fj2w/OF/zgXKdov011uoTag24Sp7fwNt7Bu3gPJ0u8A8fL1WGv28zI/HWWvOM9RYzexwf4UMUrPsYn+LTA+2/8nUHf56Lvz0Jn0Mc+nk/a2jxE+cXVXGzbLlO/lxKu9VjW35vxLlx2DG3Kqzh/Rpw+xxf4El/ha3xjyL8uzrOwOehiXW7Brdr6jM67G+XiPX4PVb+qc5tFLttPmQMlYsOm/DTteovv8D3O4CzO4QdDm23uUbY/wnqynm9UXugvOd6duEcRom/Pprbt8+3WnP5/U715vz93Mv9+JEY/4Wf8gl+xjfO4YIhf+V71fxHlE4XKJ3oOc4EjeLSiuvTY0/vZndLXqt8bbPPVQTxUsPwifVrCZVzBb/gdf+DPgvn3sBfMR4TEr3u49j2qhWMV1WXKv0n9ts3XWeSpS2/HEA5blo9YJUbX8Ff4rP87PP7h+Nci/8bHpWX4b1qZLFxbc4IgCFn8AwEUsds=
   </data>
  </layer>
  <objectgroup name="drKim" locked="1">
   <object id="109" x="2160" y="0" width="128" height="176"/>
  </objectgroup>
- <objectgroup name="spikes">
+ <objectgroup name="spikes" locked="1">
   <object id="186" x="336" y="176" width="16" height="16"/>
   <object id="187" x="1328" y="176" width="16" height="16"/>
   <object id="211" x="1136" y="128" width="16" height="16"/>
@@ -27,8 +27,7 @@
   <object id="269" x="2480" y="176" width="16" height="16"/>
   <object id="277" x="2544" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="objects" locked="1">
-  <object id="94" x="1152" y="128" width="16" height="16"/>
+ <objectgroup name="objects">
   <object id="95" x="1376" y="64" width="16" height="16"/>
   <object id="97" x="2848" y="176" width="16" height="16"/>
   <object id="98" x="3312" y="48" width="16" height="16"/>
@@ -54,9 +53,10 @@
   <object id="240" x="2512" y="80" width="16" height="16"/>
   <object id="241" x="2576" y="80" width="16" height="16"/>
   <object id="242" x="2656" y="176" width="16" height="16"/>
-  <object id="251" x="2496" y="176" width="16" height="16"/>
+  <object id="278" x="1136" y="128" width="16" height="16"/>
+  <object id="279" x="2448" y="176" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="ground">
+ <objectgroup name="ground" locked="1">
   <object id="24" x="718" y="300.667" height="0.666667"/>
   <object id="25" x="64" y="144" width="160" height="16"/>
   <object id="26" x="224" y="112" width="48" height="16"/>

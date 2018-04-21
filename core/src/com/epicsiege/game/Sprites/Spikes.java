@@ -38,7 +38,7 @@ public class Spikes  extends Sprite{
         SpikesDef(world, screen, x, y);
 
         defineSpikes(x, y);
-        velocity = new Vector2(1f, 0);
+        velocity = new Vector2(0.7f, 0);
 
 
     }
@@ -86,8 +86,8 @@ public class Spikes  extends Sprite{
         fdef2.filter.maskBits = MyGdxGame.DEFAULT_BIT | MyGdxGame.GUY_BIT | MyGdxGame.SPIKES_BIT;
         EdgeShape bodyf = new EdgeShape();
         EdgeShape bodyb = new EdgeShape();
-        bodyf.set(new Vector2(19 / MyGdxGame.PPM, 60 / MyGdxGame.PPM), new Vector2(19 / MyGdxGame.PPM, -17 / MyGdxGame.PPM));
-        bodyb.set(new Vector2(-19 / MyGdxGame.PPM, 60 / MyGdxGame.PPM), new Vector2(-19 / MyGdxGame.PPM, -17 / MyGdxGame.PPM));
+        bodyf.set(new Vector2(18 / MyGdxGame.PPM, 55 / MyGdxGame.PPM), new Vector2(18 / MyGdxGame.PPM, -17 / MyGdxGame.PPM));
+        bodyb.set(new Vector2(-18 / MyGdxGame.PPM, 55 / MyGdxGame.PPM), new Vector2(-18 / MyGdxGame.PPM, -17 / MyGdxGame.PPM));
         fdef.shape = shape;
         fdef1.shape = bodyf;
         fdef2.shape = bodyb;
@@ -100,10 +100,10 @@ public class Spikes  extends Sprite{
 
         PolygonShape topHalf = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-19, 60).scl(1 / MyGdxGame.PPM);
-        vertice[1] = new Vector2(-19, -17).scl(1 / MyGdxGame.PPM);
-        vertice[2] = new Vector2(19, 60).scl(1 / MyGdxGame.PPM);
-        vertice[3] = new Vector2(19, -17).scl(1 / MyGdxGame.PPM);
+        vertice[0] = new Vector2(-18, 55).scl(1 / MyGdxGame.PPM);
+        vertice[1] = new Vector2(-18, -17).scl(1 / MyGdxGame.PPM);
+        vertice[2] = new Vector2(18, 55).scl(1 / MyGdxGame.PPM);
+        vertice[3] = new Vector2(18, -17).scl(1 / MyGdxGame.PPM);
         topHalf.set(vertice);
 
         fdef.shape = topHalf;
