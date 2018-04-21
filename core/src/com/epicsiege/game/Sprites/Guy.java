@@ -237,4 +237,12 @@ public class Guy extends Sprite{
         b2body.applyLinearImpulse(new Vector2(-2, 4f), b2body.getWorldCenter(), true);
     }
 
+    public boolean isDead () {
+        return guyIsDead;
+    }
+
+    public float getStateTimer() {
+        return stateTimer;
+    }
+
 }
