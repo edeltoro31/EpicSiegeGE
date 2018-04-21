@@ -21,7 +21,7 @@ import com.epicsiege.game.Sprites.Guy;
 import com.epicsiege.game.Sprites.Spikes;
 import com.epicsiege.game.Tools.B2WorldCreator;
 import com.epicsiege.game.Tools.WorldContactListener;
-
+import com.badlogic.gdx.audio.Music;
 
 /**
  * Created by Joselito on 3/24/2018.
@@ -39,6 +39,7 @@ public class PlayScreen implements Screen{
     private Viewport gamePort;
     private Hud hud;
     private Guy player;
+    private Music music;
 
     //our
     private Spikes spikes, spikes2, spikes3, spikes4;
@@ -94,6 +95,9 @@ public class PlayScreen implements Screen{
 
 
         world.setContactListener(new WorldContactListener());
+        music = MyGdxGame.manager.get("audio/music/hero_music.mp3", Music.class);
+        music.setLooping(true);
+        music.play();
     }
 
     public TextureAtlas getAtlas() {

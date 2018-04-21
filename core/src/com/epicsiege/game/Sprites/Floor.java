@@ -1,10 +1,12 @@
 package com.epicsiege.game.Sprites;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.epicsiege.game.MyGdxGame;
 import com.epicsiege.game.Scenes.Hud;
 
 /**
@@ -25,6 +27,5 @@ public class Floor extends InteractiveTileObjects {
     public void onBodyHit () {
 
         Gdx.app.log("Token", "Collision");
-
     }
 }

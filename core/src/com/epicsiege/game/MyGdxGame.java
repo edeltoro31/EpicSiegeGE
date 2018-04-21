@@ -3,6 +3,9 @@ package com.epicsiege.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.epicsiege.game.Screens.PlayScreen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 public class MyGdxGame extends Game {
 
@@ -19,16 +22,25 @@ public class MyGdxGame extends Game {
 
 
 	public SpriteBatch batch;
+
+	public static AssetManager manager;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		manager = new AssetManager();
+		manager.load("audio/music/hero_music.mp3", Music.class);
+		manager.load("audio/sounds/coin.wav", Sound.class);
+		manager.load("audio/sounds/bump.wav", Sound.class);
+		manager.finishLoading();
+
 		setScreen(new PlayScreen(this));
 	}
 
 	@Override
 	public void render () {
 		super.render();
+
 	}
 	
 

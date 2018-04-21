@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.epicsiege.game.MyGdxGame;
 import com.epicsiege.game.Scenes.Hud;
+import com.badlogic.gdx.audio.Sound;
 
 /**
  * Created by Joselito on 4/17/2018.
@@ -29,6 +30,13 @@ public class Tokens extends InteractiveTileObjects {
     @Override
     public void onBodyHit () {
         Gdx.app.log("Token", "Collision");
+
+        if(getCell().getTile().getId() == BLANK_COIN)
+            MyGdxGame.manager.get("audio/sounds/bump.wav", Sound.class).play();
+        else
+            MyGdxGame.manager.get("audio/sounds/coin.wav", Sound.class).play();
+
+
         setCategoryFilter(MyGdxGame.DESTROYED_BIT);
          //tile where Token is located is set to "null".
         getCell().setTile(tileSet.getTile(BLANK_COIN));
