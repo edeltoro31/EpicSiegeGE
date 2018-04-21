@@ -38,6 +38,14 @@ public class MyGdxGame extends Game {
 	}
 
 	@Override
+	public void dispose(){
+		super.dispose();
+		manager.dispose();
+		batch.dispose();
+
+	}
+
+	@Override
 	public void render () {
 		super.render();
 
