@@ -9,16 +9,20 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.epicsiege.game.Screens.PlayScreen;
 import com.epicsiege.game.Sprites.Floor;
+import com.epicsiege.game.Sprites.Spikes;
 import com.epicsiege.game.Sprites.Tokens;
 
-/**
- * Created by Joselito on 4/17/2018.
- */
+
 
 public class B2WorldCreator {
 
-    public B2WorldCreator(World world, TiledMap map) {
+    //Our array of spikes throughout the Map
+    private static com.badlogic.gdx.utils.Array<Spikes> spike;
+
+    public B2WorldCreator(World world, TiledMap map, PlayScreen screen) {
        // World world = screen.getWorld();
        // TiledMap map =screen.getMap();
         BodyDef bdef = new BodyDef();
@@ -44,5 +48,19 @@ public class B2WorldCreator {
             //creates the floor though out our Map.
             new Floor(world, map, rect);
         }
+
+        spike = new Array<Spikes>();
+        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            spike.add(new Spikes(world, screen, rect.getX(), rect.getY()));
+
+        }
+
+
     }
-}
+
+    public Array<Spikes> getSpike() {
+        return spike;
+    }
+    }

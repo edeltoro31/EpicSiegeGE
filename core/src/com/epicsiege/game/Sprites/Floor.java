@@ -26,6 +26,8 @@ public class Floor extends InteractiveTileObjects {
     @Override
     public void onBodyHit () {
 
-        Gdx.app.log("Token", "Collision");
+        Spikes.reverseVelocity(true,false);
+
+        //Gdx.app.log("Token", "Collision");
     }
 }

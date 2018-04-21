@@ -1,11 +1,14 @@
 package com.epicsiege.game.Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.epicsiege.game.MyGdxGame;
 import com.epicsiege.game.Sprites.InteractiveTileObjects;
+import com.epicsiege.game.Sprites.Spikes;
 
 
 /**
@@ -19,6 +22,8 @@ public class WorldContactListener implements ContactListener{
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+
         if(fixA.getUserData() == "body" || fixB.getUserData() == "body") {
             Fixture body = fixA.getUserData() == "body" ? fixA : fixB;
             Fixture object = body == fixA ? fixB : fixA;
@@ -27,6 +32,19 @@ public class WorldContactListener implements ContactListener{
                 ((InteractiveTileObjects) object.getUserData()).onBodyHit();
             }
 
+        }
+
+        switch (cDef) {
+            case MyGdxGame.SPIKES_BIT | MyGdxGame.DEFAULT_BIT:
+
+                Spikes.reverseVelocity(true, false);
+
+                break;
+
+            case MyGdxGame.SPIKES_BIT | MyGdxGame.GUY_BIT:
+                Gdx.app.log("Guy", "Dead");
+
+                break;
         }
 
     }

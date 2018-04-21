@@ -41,8 +41,8 @@ public class PlayScreen implements Screen{
     private Guy player;
     private Music music;
 
-    //our
-    private Spikes spikes, spikes2, spikes3, spikes4;
+    //To create our array of Spikes.
+    private B2WorldCreator creator;
 
     //tiled map variables
     private TmxMapLoader maploader;
@@ -80,18 +80,12 @@ public class PlayScreen implements Screen{
         world = new World(new Vector2(0, -10 ), true);
         b2dr = new Box2DDebugRenderer();
 
-        //changed from new B2WorldCreator(map, world); to newB2WorldCreator(this);
-        //also edited constructor in B2WorldCreator class.
-        new B2WorldCreator(world, map);
 
         //Gets our Avatar (Guy)
         player = new Guy(world,this);
 
         //creates Spikes in our map.
-        spikes = new Spikes(world, this, .32f, .32f, 1);
-        spikes2 = new Spikes(world, this, .32f, .32f, 2);
-        spikes3 = new Spikes(world, this, .32f, .32f, 3);
-        spikes4 = new Spikes(world, this, .32f, .32f, 4);
+        creator = new B2WorldCreator(world, map, this);
 
 
         world.setContactListener(new WorldContactListener());
@@ -146,10 +140,10 @@ public class PlayScreen implements Screen{
         world.step(1/60f, 6, 2);
 
         player.update(dt);
-        spikes.update(dt);
-        spikes2.update(dt);
-        spikes3.update(dt);
-        spikes4.update(dt);
+
+        //update our spikes.
+        for (Spikes spikes : creator.getSpike())
+            spikes.update(dt);
 
         hud.update(dt);
 
@@ -180,10 +174,8 @@ public class PlayScreen implements Screen{
         player.draw(game.batch);
 
         //draws the spikes on the map
-        spikes.draw(game.batch);
-        spikes2.draw(game.batch);
-        spikes3.draw(game.batch);
-        spikes4.draw(game.batch);
+        for (Spikes spikes : creator.getSpike())
+            spikes.draw(game.batch);
 
         game.batch.end();
 

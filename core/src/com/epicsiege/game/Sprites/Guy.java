@@ -171,16 +171,16 @@ public class Guy extends Sprite{
 
         //What our collision detectors can interact with.
         fdef.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef.filter.maskBits =  MyGdxGame.TOKEN_BIT | MyGdxGame.DEFAULT_BIT;
+        fdef.filter.maskBits =  MyGdxGame.TOKEN_BIT | MyGdxGame.DEFAULT_BIT | MyGdxGame.SPIKES_BIT;
 
         fdef1.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef1.filter.maskBits =  MyGdxGame.TOKEN_BIT;
+        fdef1.filter.maskBits =  MyGdxGame.TOKEN_BIT | MyGdxGame.SPIKES_BIT;
         fdef2.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef2.filter.maskBits =  MyGdxGame.TOKEN_BIT;
+        fdef2.filter.maskBits =  MyGdxGame.TOKEN_BIT | MyGdxGame.SPIKES_BIT;
         fdef3.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef3.filter.maskBits = MyGdxGame.TOKEN_BIT;
+        fdef3.filter.maskBits = MyGdxGame.TOKEN_BIT | MyGdxGame.SPIKES_BIT;
         fdef4.filter.categoryBits = MyGdxGame.GUY_BIT;
-        fdef4.filter.maskBits = MyGdxGame.TOKEN_BIT;
+        fdef4.filter.maskBits = MyGdxGame.TOKEN_BIT | MyGdxGame.SPIKES_BIT;
 
 
         fdef.shape = shape;
