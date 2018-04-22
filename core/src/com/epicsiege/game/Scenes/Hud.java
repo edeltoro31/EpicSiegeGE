@@ -65,8 +65,6 @@ public class Hud implements Disposable{
         table.add(countdownLabel).expandX();
 
         stage.addActor(table);
-
-
     }
 
     //Timer
@@ -84,12 +82,8 @@ public class Hud implements Disposable{
         scoreLabel.setText(String.format("%06d", score));
     }
 
-
-
     @Override
     public void dispose() {
         stage.dispose();
-
-
     }
 }

@@ -28,7 +28,6 @@ public class Guy extends Sprite{
     public State currentState;
     public State previousState;
 
-
     public World world;
     public static Body b2body;
 
@@ -41,8 +40,6 @@ public class Guy extends Sprite{
     private float stateTimer;
     private boolean runningRight;
     private static boolean guyIsDead;
-
-
 
     public Guy (World world, PlayScreen screen) {
 
@@ -67,7 +64,6 @@ public class Guy extends Sprite{
         guyRun = new Animation(0.1f, frames);
         frames.clear();
 
-
         //Sets the jumping sprites for our Avatar (Guy)
         for (int i = 6; i < 9; i++) {
 
@@ -86,7 +82,6 @@ public class Guy extends Sprite{
         guyFight = new Animation (0.1f, frames);
 
         guyDead = new TextureRegion(screen.getAtlas().findRegion("hero_fighting"), 100, 0, 49, 49);
-
 
         defineGuy();
 
@@ -141,7 +136,6 @@ public class Guy extends Sprite{
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
         return region;
-
     }
 
     //Gets the state of our Avatar (Guy) based on what he is doing on the x and y coordinate Map.
@@ -195,9 +189,7 @@ public class Guy extends Sprite{
         fdef4.filter.categoryBits = MyGdxGame.GUY_BIT;
         fdef4.filter.maskBits = MyGdxGame.TOKEN_BIT | MyGdxGame.SPIKES_BIT;
 
-
         fdef.shape = shape;
-
 
         b2body.createFixture(fdef);
 

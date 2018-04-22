@@ -108,9 +108,6 @@ public class PlayScreen implements Screen{
 
     }
 
-
-
-
     //keys, what keys make the character move
     //and how he moves.
     public void handleInput(float dt) {
@@ -128,13 +125,7 @@ public class PlayScreen implements Screen{
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
                 player.b2body.applyForce(new Vector2(0f, 0.1f), player.b2body.getWorldCenter(), true);
         }
-
     }
-
-
-
-
-
 
     public void update(float dt) {
         handleInput(dt);
@@ -156,11 +147,6 @@ public class PlayScreen implements Screen{
         gamecam.update();
         renderer.setView(gamecam);
     }
-
-
-
-
-
 
     @Override
     public void render(float delta) {

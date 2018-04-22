@@ -2,6 +2,7 @@ package com.epicsiege.game.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -39,7 +40,7 @@ public class GameOverScreen implements Screen{
         table.setFillParent(true);
 
         com.badlogic.gdx.scenes.scene2d.ui.Label gameOverLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Game Over", font);
-        com.badlogic.gdx.scenes.scene2d.ui.Label playAgainLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Click to Play Again", font);
+        com.badlogic.gdx.scenes.scene2d.ui.Label playAgainLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Play Again? (Press any key)", font);
 
         table.add(gameOverLabel).expandX();
         table.row();
@@ -55,7 +56,7 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             Guy.hit(false);
             game.setScreen(new PlayScreen((MyGdxGame) game));
             dispose();
