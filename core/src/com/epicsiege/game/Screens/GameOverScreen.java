@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epicsiege.game.MyGdxGame;
 import com.epicsiege.game.Sprites.Guy;
-
 import java.awt.Label;
 
 /**
@@ -25,7 +24,6 @@ public class GameOverScreen implements Screen{
 
     private Viewport viewport;
     private Stage stage;
-
     private Game game;
 
     public GameOverScreen (Game game) {
