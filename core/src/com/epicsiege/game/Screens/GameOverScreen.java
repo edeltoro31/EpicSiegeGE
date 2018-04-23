@@ -1,4 +1,5 @@
 package com.epicsiege.game.Screens;
+import java.util.Scanner;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -28,15 +29,24 @@ public class GameOverScreen implements Screen{
     private Game game;
 
     int score, highscore;
+    public static String name = " ";
 
     public GameOverScreen (Game game, int score) {
+
         this.score = score;
         this.game = game;
 
         Preferences prefs = Gdx.app.getPreferences("epicsiege");
         this.highscore = prefs.getInteger("highscore", 0);
+        //this.name = prefs.getString("name", null);
+
 
         if (score > highscore) {
+            Gdx.input.setOnscreenKeyboardVisible(true);
+            MyTextInputListener listener = new MyTextInputListener();
+            Gdx.input.getTextInput(listener, "Your Name Worthy Challenger", name, "Winner");
+
+            prefs.putString("name", name);
             prefs.putInteger("highscore", score);
             prefs.flush();
         }
@@ -52,7 +62,7 @@ public class GameOverScreen implements Screen{
 
         com.badlogic.gdx.scenes.scene2d.ui.Label gameOverLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Game Over", font);
         com.badlogic.gdx.scenes.scene2d.ui.Label scoreLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Your Score: " + score, font);
-        com.badlogic.gdx.scenes.scene2d.ui.Label highscoreLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Highest Score: " + highscore, font);
+        com.badlogic.gdx.scenes.scene2d.ui.Label highscoreLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Highest Score: " + name + " : " + highscore, font);
         com.badlogic.gdx.scenes.scene2d.ui.Label playAgainLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Play Again? (Press any key)", font);
         com.badlogic.gdx.scenes.scene2d.ui.Label congratulationsLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("CONGRATULATIONS", font);
 
@@ -85,7 +95,11 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void render(float delta) {
+        Preferences prefs = Gdx.app.getPreferences("epicsiege");
         if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+           // Gdx.input.setOnscreenKeyboardVisible(true);
+
+
             Guy.hit(false, -2f, 4f);
             game.setScreen(new PlayScreen((MyGdxGame) game));
             dispose();
