@@ -50,7 +50,7 @@ public class Spikes  extends Sprite{
         frames = new Array<TextureRegion>();
         for (int i = 0; i < 7; i++)
         {
-            frames.add(new TextureRegion(screen.getAtlasSpike().findRegion("Spikes"), i * 46, 0, 43, 125));//152
+            frames.add(new TextureRegion(screen.getAtlasSpike().findRegion("Spikes"), (i * 46) - 1, 0, 43, 125));//152
         }
         spinAnimation = new com.badlogic.gdx.graphics.g2d.Animation<TextureRegion>(0.4f, frames);
         stateTime = 0;

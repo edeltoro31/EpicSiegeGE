@@ -54,7 +54,7 @@ public class WorldContactListener implements ContactListener{
 
             case MyGdxGame.SPIKES_BIT | MyGdxGame.GUY_BIT:
                 Gdx.app.log("Guy", "Dead");
-                Guy.hit(true);
+                Guy.hit(true, -2f, 4f);
 
                 break;
         }

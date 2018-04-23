@@ -60,7 +60,7 @@ public class Guy extends Sprite{
         //Sets the running sprites for our Avatar(Guy)
         //the sprites sizes are all 49x49
         // the x and y coordinates tell where the sprite is located in the pack png.
-        frames.add(new TextureRegion(getTexture(), 5 * 50, 0, 49, 49));
+        frames.add(new TextureRegion(getTexture(), (5 * 50) - 2, 0, 49, 49));
         guyRun = new Animation(0.1f, frames);
         frames.clear();
 
@@ -146,8 +146,10 @@ public class Guy extends Sprite{
         else if (b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
 
-        else if (b2body.getLinearVelocity().y < 0)
+        else if (b2body.getLinearVelocity().y < -15) {
+            hit(true, -2f, 4f);
             return State.FALLING;
+        }
 
         else if (b2body.getLinearVelocity().x != 0)
             return  State.RUNNING;
@@ -200,10 +202,10 @@ public class Guy extends Sprite{
         EdgeShape bodyt = new EdgeShape(); //top
         EdgeShape bodybt = new EdgeShape(); //bottom
         //There is a sensor in front, behind, on top, and below our Avatar(Guy)
-        bodyf.set(new Vector2(10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM), new Vector2(10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM));
-        bodyb.set(new Vector2(-10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM), new Vector2(-10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM));
-        bodyt.set(new Vector2(10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM), new Vector2(-10 / MyGdxGame.PPM, 10 / MyGdxGame.PPM));
-        bodybt.set(new Vector2(-10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM), new Vector2(10 / MyGdxGame.PPM, -10 / MyGdxGame.PPM));
+        bodyf.set(new Vector2(11 / MyGdxGame.PPM, 11 / MyGdxGame.PPM), new Vector2(11 / MyGdxGame.PPM, -11 / MyGdxGame.PPM));
+        bodyb.set(new Vector2(-11 / MyGdxGame.PPM, 11 / MyGdxGame.PPM), new Vector2(-11 / MyGdxGame.PPM, -11 / MyGdxGame.PPM));
+        bodyt.set(new Vector2(11 / MyGdxGame.PPM, 11 / MyGdxGame.PPM), new Vector2(-11 / MyGdxGame.PPM, 11 / MyGdxGame.PPM));
+        bodybt.set(new Vector2(-11 / MyGdxGame.PPM, -11 / MyGdxGame.PPM), new Vector2(11 / MyGdxGame.PPM, -11 / MyGdxGame.PPM));
         fdef1.shape = bodyf;
         fdef2.shape = bodyb;
         fdef3.shape = bodyt;
@@ -220,14 +222,14 @@ public class Guy extends Sprite{
         b2body.createFixture(fdef4).setUserData("body");
     }
 
-    public static void hit(boolean x) {
-        guyIsDead = x;
-        if (x == true) {
+    public static void hit(boolean t, float x, float y) {
+        guyIsDead = t;
+        if (t == true) {
             Filter filter = new Filter();
             filter.maskBits = MyGdxGame.NOTHING_BIT;
             for (Fixture fixture : b2body.getFixtureList())
                 fixture.setFilterData(filter);
-            b2body.applyLinearImpulse(new Vector2(-2, 4f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(x, y), b2body.getWorldCenter(), true);
         }
     }
 

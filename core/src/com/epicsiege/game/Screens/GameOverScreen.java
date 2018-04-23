@@ -3,6 +3,7 @@ package com.epicsiege.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -26,8 +27,20 @@ public class GameOverScreen implements Screen{
     private Stage stage;
     private Game game;
 
-    public GameOverScreen (Game game) {
+    int score, highscore;
+
+    public GameOverScreen (Game game, int score) {
+        this.score = score;
         this.game = game;
+
+        Preferences prefs = Gdx.app.getPreferences("epicsiege");
+        this.highscore = prefs.getInteger("highscore", 0);
+
+        if (score > highscore) {
+            prefs.putInteger("highscore", score);
+            prefs.flush();
+        }
+
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((MyGdxGame) game).batch);
 
@@ -38,11 +51,29 @@ public class GameOverScreen implements Screen{
         table.setFillParent(true);
 
         com.badlogic.gdx.scenes.scene2d.ui.Label gameOverLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Game Over", font);
+        com.badlogic.gdx.scenes.scene2d.ui.Label scoreLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Your Score: " + score, font);
+        com.badlogic.gdx.scenes.scene2d.ui.Label highscoreLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Highest Score: " + highscore, font);
         com.badlogic.gdx.scenes.scene2d.ui.Label playAgainLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Play Again? (Press any key)", font);
+        com.badlogic.gdx.scenes.scene2d.ui.Label congratulationsLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("CONGRATULATIONS", font);
 
-        table.add(gameOverLabel).expandX();
-        table.row();
-        table.add(playAgainLabel).expandX().padTop(10f);
+        if (score >= highscore) {
+            table.add(gameOverLabel).expandX();
+            table.row();
+            table.add(congratulationsLabel).expandX().padTop(10f);
+            table.row();
+            table.add(highscoreLabel).expandX().padTop(10f);
+            table.row();
+            table.add(playAgainLabel).expandX().padTop(10f);
+        }
+        else {
+            table.add(gameOverLabel).expandX();
+            table.row();
+            table.add(scoreLabel).expandX().padTop(10f);
+            table.row();
+            table.add(highscoreLabel).expandX().padTop(10f);
+            table.row();
+            table.add(playAgainLabel).expandX().padTop(10f);
+        }
 
         stage.addActor(table);
     }
@@ -55,7 +86,7 @@ public class GameOverScreen implements Screen{
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
-            Guy.hit(false);
+            Guy.hit(false, -2f, 4f);
             game.setScreen(new PlayScreen((MyGdxGame) game));
             dispose();
         }

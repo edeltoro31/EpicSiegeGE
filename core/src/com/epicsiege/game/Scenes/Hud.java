@@ -26,7 +26,7 @@ public class Hud implements Disposable{
 
     private Integer worldTimer;
     private float timeCount;
-    private static Integer score;
+    public static Integer score;
 
     Label countdownLabel;
     static Label scoreLabel;
