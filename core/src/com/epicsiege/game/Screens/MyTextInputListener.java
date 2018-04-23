@@ -2,6 +2,7 @@ package com.epicsiege.game.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
+import com.epicsiege.game.Scenes.Hud;
 
 /**
  * Created by Joselito on 4/23/2018.

@@ -1,6 +1,8 @@
 package com.epicsiege.game.Scenes;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -27,6 +29,7 @@ public class Hud implements Disposable{
     private Integer worldTimer;
     private float timeCount;
     public static Integer score;
+    public static String name;
 
     Label countdownLabel;
     static Label scoreLabel;
@@ -41,6 +44,12 @@ public class Hud implements Disposable{
         worldTimer = 300;
         timeCount = 0;
         score = 0;
+
+        //Preferences prefs = Gdx.app.getPreferences("epicsiege");
+        //prefs.putString("name", name);
+        name = " ";
+
+        //prefs.putString("winner", name);
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
