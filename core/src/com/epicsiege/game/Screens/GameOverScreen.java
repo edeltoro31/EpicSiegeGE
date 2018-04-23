@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Game;
@@ -56,21 +57,27 @@ public class GameOverScreen implements Screen{
         this.highscore = prefs.getInteger("highscore", 0);
         //this.winner = prefs.getString("winner", null);
 
-        if (score >= highscore) {
+        if (score > highscore) {
 
             Gdx.input.setOnscreenKeyboardVisible(true);
             MyTextInputListener listener = new MyTextInputListener();
             Gdx.input.getTextInput(listener, "Your Name Worthy Challenger", name, "Winner");
 
+            CheckScore();
             prefs.putString("name", name);
            // winner = Hud.name;
+            //winner = name;
             prefs.putInteger("highscore", score);
-            CheckScore();
+
 
             prefs.flush();
         }
-        else
+        else {
+            if (!name.equals(" "))
+                CheckScore();
+
             name = this.getHighscorValue();
+        }
 
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
@@ -88,7 +95,7 @@ public class GameOverScreen implements Screen{
         com.badlogic.gdx.scenes.scene2d.ui.Label playAgainLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("Play Again? (Press any key)", font);
         com.badlogic.gdx.scenes.scene2d.ui.Label congratulationsLabel = new com.badlogic.gdx.scenes.scene2d.ui.Label("CONGRATULATIONS", font);
 
-        if (score >= highscore) {
+        if (score > highscore) {
             table.add(gameOverLabel).expandX();
             table.row();
             table.add(congratulationsLabel).expandX().padTop(10f);
@@ -126,12 +133,13 @@ public class GameOverScreen implements Screen{
                 }
             }
             FileWriter writeFile = null;
-            BufferedWriter writer = null;
+            PrintWriter writer = null;
             try {
-                writeFile = new FileWriter(scoreFile);
-                writer = new BufferedWriter(writeFile);
+                writeFile = new FileWriter("highscore.dat");
+                writer = new PrintWriter(writeFile);
 
                 writer.write(this.name);
+                writer.close();
             }
             catch (Exception e) {
                 //errors
@@ -154,10 +162,14 @@ public class GameOverScreen implements Screen{
     {
         FileReader readFile = null;
         BufferedReader reader = null;
+        //File readFile  = null;
+        //Scanner x = null; //new Scanner(readFile);
         try {
             readFile = new FileReader("highscore.dat");
+            //x = new Scanner(readFile);
             reader = new BufferedReader(readFile);
             return reader.readLine();
+            //return x.next();
         }
         catch (Exception e) {
             return "Nobody";
@@ -167,7 +179,7 @@ public class GameOverScreen implements Screen{
                 if(reader != null)
                     reader.close();
             }
-            catch (IOException e) {
+            catch  (Exception e) {
                 e.printStackTrace();
             }
         }
